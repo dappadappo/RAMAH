@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ materi.judul }} | RAMAH</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<main class="app-container">
+
+    <header class="topbar">
+        <div>
+            <h1>RAMAH<span>.</span></h1>
+            <p>Remaja Aktif Minum Tablet Tambah Darah</p>
+        </div>
+        <div class="avatar">💗</div>
+    </header>
+
+    <a href="{{ url_for('edukasi') }}"
+       class="back-education">
+        ← Kembali ke Edukasi
+    </a>
+
+    <section class="education-detail-hero">
+        <div class="detail-emoji">
+            {{ materi.emoji }}
+        </div>
+
+        <h2>{{ materi.judul }}</h2>
+
+        <p>{{ materi.deskripsi }}</p>
+    </section>
+
+    <section class="education-content">
+
+        {% for bagian in materi.isi %}
+
+            <article class="education-article">
+
+                <h3>{{ bagian.subjudul }}</h3>
+
+                <p>{{ bagian.teks }}</p>
+
+            </article>
+
+        {% endfor %}
+
+    </section>
+
+    <section class="education-reminder">
+        <h3>Ingat, Sahabat RAMAH! 💗</h3>
+        <p>
+            Jaga kesehatan dengan pola makan bergizi,
+            konsumsi TTD sesuai anjuran, dan periksa
+            kesehatan secara berkala.
+        </p>
+    </section>
+
+    <a href="{{ url_for('edukasi') }}"
+       class="education-back-button">
+        Selesai Membaca 🌸
+    </a>
+
+    <nav class="bottom-nav">
+
+        <a href="/">
+            <span>⌂</span>
+            <small>Home</small>
+        </a>
+
+        <a href="/ttd">
+            <span>💊</span>
+            <small>TTD</small>
+        </a>
+
+        <a href="/kalender">
+            <span>▦</span>
+            <small>Kalender</small>
+        </a>
+
+        <a href="/edukasi" class="active">
+            <span>♡</span>
+            <small>Edukasi</small>
+        </a>
+
+        <a href="/profil">
+            <span>♙</span>
+            <small>Profil</small>
+        </a>
+
+    </nav>
+
+</main>
+
+</body>
+</html>

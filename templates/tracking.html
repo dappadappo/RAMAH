@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tracking TTD | RAMAH</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<main class="app-container">
+
+    <header class="topbar">
+        <div>
+            <h1>RAMAH<span>.</span></h1>
+            <p>Remaja Aktif Minum Tablet Tambah Darah</p>
+        </div>
+        <div class="avatar">💗</div>
+    </header>
+
+    <p class="login-link">
+    Catatan milik: <strong>{{ session_username }}</strong>
+</p>
+
+    <section class="welcome">
+        <div>
+            <p>Catatan kesehatanku</p>
+            <h2>Tracking TTD 💊</h2>
+            <small>Yuk, catat aktivitas konsumsi TTD-mu.</small>
+        </div>
+    </section>
+
+    <section class="reminder-card">
+        <small>CATATAN HARI INI</small>
+
+        <h2>{{ today }}</h2>
+
+        {% if today_log %}
+            {% if today_log['status'] == 'taken' %}
+                <p>Yeay! Konsumsi TTD sudah tercatat hari ini 💗</p>
+            {% else %}
+                <p>Kamu mencatat belum minum TTD hari ini.</p>
+            {% endif %}
+        {% else %}
+            <p>Belum ada catatan untuk hari ini.</p>
+        {% endif %}
+
+        {% if not today_log or today_log['status'] != 'taken' %}
+        <form action="/ttd/catat" method="POST">
+            <input type="hidden" name="status" value="taken">
+            <button type="submit">
+                Sudah Minum TTD
+            </button>
+        </form>
+        {% endif %}
+
+        {% if not today_log or today_log['status'] != 'missed' %}
+        <form action="/ttd/catat" method="POST">
+            <input type="hidden" name="status" value="missed">
+            <button type="submit" class="secondary-button">
+                Belum Minum TTD
+            </button>
+        </form>
+        {% endif %}
+    </section>
+
+    <section class="section">
+        <h3>Riwayat Konsumsi 🌸</h3>
+
+        <div class="tip-card">
+
+            {% if logs %}
+                {% for log in logs %}
+                    <div class="history-item">
+                        <div>
+                            <strong>{{ log['log_date'] }}</strong>
+
+                            {% if log['status'] == 'taken' %}
+                                <p class="success-text">
+                                    ✓ Sudah minum TTD
+                                </p>
+                            {% else %}
+                                <p class="missed-text">
+                                    Belum minum TTD
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Belum ada riwayat konsumsi.</p>
+            {% endif %}
+
+        </div>
+    </section>
+
+    <nav class="bottom-nav">
+        <a href="/">
+            <span>⌂</span>
+            <small>Home</small>
+        </a>
+
+        <a href="/ttd" class="active">
+            <span>💊</span>
+            <small>TTD</small>
+        </a>
+
+        <a href="/">
+            <span>▦</span>
+            <small>Kalender</small>
+        </a>
+
+        <a href="/">
+            <span>♡</span>
+            <small>Edukasi</small>
+        </a>
+
+        <a href="/">
+            <span>♙</span>
+            <small>Profil</small>
+        </a>
+    </nav>
+<form action="{{ url_for('logout') }}" method="POST">
+    <button type="submit" class="logout-button">
+        Keluar dari akun
+    </button>
+</form>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Monitoring Hb | RAMAH</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<main class="app-container">
+
+    <header class="topbar">
+        <div>
+            <h1>RAMAH<span>.</span></h1>
+            <p>Remaja Aktif Minum Tablet Tambah Darah</p>
+        </div>
+        <div class="avatar">💗</div>
+    </header>
+
+    <section class="welcome">
+        <div>
+            <p>Kenali kondisi kesehatanmu</p>
+            <h2>Monitoring Hb 🩸</h2>
+            <small>Catat hasil pemeriksaan hemoglobinmu.</small>
+        </div>
+        <div class="mascot">🌷</div>
+    </section>
+
+    <!-- NOTIFIKASI -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="form-message {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endwith %}
+
+    <!-- HASIL TERAKHIR -->
+
+    <section class="hb-summary">
+
+        <small>PEMERIKSAAN TERAKHIR</small>
+
+        {% if latest %}
+
+            <h2>{{ "%.1f"|format(latest['hb_value']) }}
+                <span>g/dL</span>
+            </h2>
+
+            <p>
+                Tanggal pemeriksaan:
+                {{ latest['exam_date'] }}
+            </p>
+
+            <small>
+                Nilai ini merupakan hasil yang dicatat pengguna.
+            </small>
+
+        {% else %}
+
+            <h2>-- <span>g/dL</span></h2>
+
+            <p>Belum ada hasil pemeriksaan.</p>
+
+            <small>Tambahkan hasil pemeriksaan pertamamu.</small>
+
+        {% endif %}
+
+    </section>
+
+    <!-- FORM INPUT -->
+
+    <section class="tip-card">
+
+        <h3>Tambah Hasil Pemeriksaan 🌸</h3>
+
+        <form method="POST"
+              action="{{ url_for('monitoring_hb') }}">
+
+            <label for="exam_date">
+                Tanggal pemeriksaan
+            </label>
+
+            <input
+                type="date"
+                id="exam_date"
+                name="exam_date"
+                max="{{ today }}"
+                required
+            >
+
+            <label for="hb_value">
+                Hasil Hb (g/dL)
+            </label>
+
+            <input
+                type="number"
+                id="hb_value"
+                name="hb_value"
+                step="0.1"
+                min="3"
+                max="25"
+                placeholder="Contoh: 12.5"
+                required
+            >
+
+            <label for="examination_place">
+                Tempat pemeriksaan (opsional)
+            </label>
+
+            <input
+                type="text"
+                id="examination_place"
+                name="examination_place"
+                maxlength="100"
+                placeholder="Contoh: Puskesmas"
+            >
+
+            <label for="notes">
+                Catatan tambahan (opsional)
+            </label>
+
+            <textarea
+                id="notes"
+                name="notes"
+                maxlength="500"
+                rows="3"
+                placeholder="Tuliskan catatan pemeriksaan..."
+            ></textarea>
+
+            <button type="submit" class="form-button">
+                Simpan Hasil Hb 💗
+            </button>
+
+        </form>
+
+    </section>
+
+    <!-- GRAFIK -->
+
+    <section class="section">
+
+        <h3>Perkembangan Hb 📈</h3>
+
+        <div class="tip-card">
+
+            {% if chart_records %}
+
+                <div class="hb-chart">
+
+                    {% for record in chart_records %}
+
+                        <div class="hb-chart-item">
+
+                            <div class="hb-chart-label">
+                                <span>{{ record['exam_date'] }}</span>
+                                <strong>
+                                    {{ "%.1f"|format(record['hb_value']) }}
+                                    g/dL
+                                </strong>
+                            </div>
+
+                            <div class="hb-bar-background">
+                                <div
+                                    class="hb-bar"
+                                    style="width: {{ (record['hb_value'] / 25 * 100)|round(1) }}%">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <small class="upload-note">
+                    Grafik menunjukkan nilai hasil pemeriksaan
+                    yang dicatat, bukan diagnosis atau penilaian
+                    tingkat keparahan anemia.
+                </small>
+
+            {% else %}
+
+                <p>Grafik akan muncul setelah kamu memasukkan hasil Hb.</p>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+    <!-- RIWAYAT -->
+
+    <section class="section">
+
+        <h3>Riwayat Pemeriksaan 🩷</h3>
+
+        {% if records %}
+
+            {% for record in records %}
+
+                <div class="hb-history">
+
+                    <div>
+                        <strong>
+                            {{ record['exam_date'] }}
+                        </strong>
+
+                        <h3>
+                            {{ "%.1f"|format(record['hb_value']) }}
+                            g/dL
+                        </h3>
+
+                        {% if record['examination_place'] %}
+                            <small>
+                                {{ record['examination_place'] }}
+                            </small>
+                        {% endif %}
+
+                        {% if record['notes'] %}
+                            <p>{{ record['notes'] }}</p>
+                        {% endif %}
+                    </div>
+
+                    <form
+                        method="POST"
+                        action="{{ url_for(
+                            'delete_hb',
+                            record_id=record['id']
+                        ) }}"
+                        onsubmit="return confirm(
+                            'Yakin ingin menghapus catatan ini?'
+                        )">
+
+                        <button
+                            type="submit"
+                            class="delete-hb-button">
+                            Hapus
+                        </button>
+
+                    </form>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="tip-card">
+                <p>Belum ada riwayat pemeriksaan Hb.</p>
+            </div>
+
+        {% endif %}
+
+    </section>
+
+    <section class="hb-info">
+        <strong>💡 Informasi penting</strong>
+        <p>
+            Hasil Hb perlu diinterpretasikan oleh tenaga kesehatan
+            sesuai usia, kondisi individu, dan pedoman klinis.
+            RAMAH merupakan media pencatatan dan edukasi,
+            bukan alat diagnosis.
+        </p>
+    </section>
+
+    <!-- NAVIGASI -->
+
+    <nav class="bottom-nav">
+
+        <a href="/">
+            <span>⌂</span>
+            <small>Home</small>
+        </a>
+
+        <a href="/ttd">
+            <span>💊</span>
+            <small>TTD</small>
+        </a>
+
+        <a href="/kalender">
+            <span>▦</span>
+            <small>Kalender</small>
+        </a>
+
+        <a href="/edukasi">
+            <span>♡</span>
+            <small>Edukasi</small>
+        </a>
+
+        <a href="/profil">
+            <span>♙</span>
+            <small>Profil</small>
+        </a>
+
+    </nav>
+
+</main>
+
+</body>
+</html>

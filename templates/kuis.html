@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kuis RAMAH | Anemia dan TTD</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<main class="app-container">
+
+    <header class="topbar">
+        <div>
+            <h1>RAMAH<span>.</span></h1>
+            <p>Remaja Aktif Minum Tablet Tambah Darah</p>
+        </div>
+        <div class="avatar">💗</div>
+    </header>
+
+    <a href="{{ url_for('edukasi') }}" class="back-education">
+        ← Kembali ke Edukasi
+    </a>
+
+    <section class="welcome">
+        <div>
+            <p>Semangat mengerjakan!</p>
+            <h2>Kuis RAMAH 🌸</h2>
+            <small>Jawab 10 pertanyaan berikut dengan teliti.</small>
+        </div>
+        <div class="mascot">📝</div>
+    </section>
+
+    <section class="tip-card">
+
+        <h3>Petunjuk Kuis 💗</h3>
+
+        <p>
+            Pilih satu jawaban yang menurutmu paling tepat
+            pada setiap pertanyaan.
+        </p>
+
+        <p>
+            <strong>Jumlah soal:</strong> {{ soal|length }} pertanyaan
+        </p>
+
+        <p>
+            <strong>Penilaian:</strong> Setiap jawaban benar
+            bernilai 10 poin jika terdapat 10 soal.
+        </p>
+
+    </section>
+
+    <form method="POST" action="{{ url_for('kuis') }}">
+
+        {% for item in soal %}
+
+        <section class="tip-card quiz-question">
+
+            <div class="quiz-question-header">
+                <span>PERTANYAAN {{ loop.index }}</span>
+                <span>{{ loop.index }} / {{ soal|length }}</span>
+            </div>
+
+            <h3>{{ item.pertanyaan }}</h3>
+
+            <div class="quiz-options">
+
+                {% for huruf, teks in item.pilihan.items() %}
+
+                <label class="quiz-option">
+
+                    <input
+                        type="radio"
+                        name="jawaban_{{ item.id }}"
+                        value="{{ huruf }}"
+                        required
+                    >
+
+                    <span class="quiz-option-letter">
+                        {{ huruf }}
+                    </span>
+
+                    <span>{{ teks }}</span>
+
+                </label>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+        {% endfor %}
+
+        <section class="tip-card">
+
+            <h3>Sudah yakin dengan jawabanmu? 🌷</h3>
+
+            <p>
+                Periksa kembali semua jawaban sebelum
+                mengirimkan hasil kuis.
+            </p>
+
+            <button type="submit" class="form-button">
+                Selesaikan Kuis 💗
+            </button>
+
+        </section>
+
+    </form>
+
+    <nav class="bottom-nav">
+
+        <a href="/">
+            <span>⌂</span>
+            <small>Home</small>
+        </a>
+
+        <a href="/ttd">
+            <span>💊</span>
+            <small>TTD</small>
+        </a>
+
+        <a href="/kalender">
+            <span>▦</span>
+            <small>Kalender</small>
+        </a>
+
+        <a href="/edukasi" class="active">
+            <span>♡</span>
+            <small>Edukasi</small>
+        </a>
+
+        <a href="/profil">
+            <span>♙</span>
+            <small>Profil</small>
+        </a>
+
+    </nav>
+
+</main>
+
+</body>
+</html>

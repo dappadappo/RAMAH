@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profil Saya | RAMAH</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<main class="app-container">
+
+    <header class="topbar">
+        <div>
+            <h1>RAMAH<span>.</span></h1>
+            <p>Remaja Aktif Minum Tablet Tambah Darah</p>
+        </div>
+        <div class="avatar">💗</div>
+    </header>
+
+    <section class="welcome">
+        <div>
+            <p>Hai, Sahabat RAMAH!</p>
+            <h2>Profil Saya 🌸</h2>
+            <small>Kenali dan lengkapi informasi dirimu.</small>
+        </div>
+        <div class="mascot">🌷</div>
+    </section>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="form-message {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endwith %}
+
+    <section class="profile-header">
+
+        {% if user['profile_photo'] %}
+            <img
+                src="{{ url_for('static', filename=user['profile_photo']) }}"
+                class="profile-photo"
+                alt="Foto profil"
+            >
+        {% else %}
+            <div class="profile-placeholder">🌸</div>
+        {% endif %}
+
+        <h2>{{ user['display_name'] or user['username'] }}</h2>
+
+        <p>@{{ user['username'] }}</p>
+
+        <small>Sahabat RAMAH 💗</small>
+
+    </section>
+
+    <section class="tip-card">
+
+        <h3>Edit Informasi Profil</h3>
+
+        <form method="POST"
+              action="{{ url_for('profil') }}"
+              enctype="multipart/form-data">
+
+            <label for="display_name">Nama panggilan</label>
+
+            <input
+                type="text"
+                id="display_name"
+                name="display_name"
+                maxlength="50"
+                value="{{ user['display_name'] or '' }}"
+                placeholder="Contoh: Nuna"
+                required
+            >
+
+            <label for="school_level">Jenjang sekolah</label>
+
+            <select id="school_level" name="school_level" required>
+                <option value="">Pilih jenjang</option>
+                <option value="SMP"
+                    {% if user['school_level'] == 'SMP' %}selected{% endif %}>
+                    SMP
+                </option>
+                <option value="SMA"
+                    {% if user['school_level'] == 'SMA' %}selected{% endif %}>
+                    SMA
+                </option>
+            </select>
+
+            <label for="school_class">Kelas</label>
+
+            <select id="school_class" name="school_class" required>
+                <option value="">Pilih kelas</option>
+            </select>
+
+            <label for="age">Usia (tahun)</label>
+
+            <input
+                type="number"
+                id="age"
+                name="age"
+                min="10"
+                max="19"
+                value="{{ user['age'] or '' }}"
+                placeholder="Contoh: 16"
+                required
+            >
+
+            <label for="profile_photo">Foto profil</label>
+
+            <input
+                type="file"
+                id="profile_photo"
+                name="profile_photo"
+                accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+            >
+
+            <small class="upload-note">
+                Format JPG, PNG, atau WEBP. Maksimal 2 MB.
+                Kosongkan jika tidak ingin mengganti foto.
+            </small>
+
+            <button type="submit" class="form-button">
+                Simpan Perubahan 💗
+            </button>
+
+        </form>
+
+    </section>
+
+    <form action="{{ url_for('logout') }}" method="POST">
+        <button type="submit" class="logout-button">
+            Keluar dari akun
+        </button>
+    </form>
+
+    <nav class="bottom-nav">
+        <a href="/">
+            <span>⌂</span>
+            <small>Home</small>
+        </a>
+
+        <a href="/ttd">
+            <span>💊</span>
+            <small>TTD</small>
+        </a>
+
+        <a href="/">
+            <span>▦</span>
+            <small>Kalender</small>
+        </a>
+
+        <a href="/">
+            <span>♡</span>
+            <small>Edukasi</small>
+        </a>
+
+        <a href="/profil" class="active">
+            <span>♙</span>
+            <small>Profil</small>
+        </a>
+    </nav>
+
+</main>
+
+<script>
+const level = document.getElementById("school_level");
+const schoolClass = document.getElementById("school_class");
+
+const currentClass = {{ (user['school_class'] or '')|tojson }};
+
+const classes = {
+    SMP: ["VII", "VIII", "IX"],
+    SMA: ["X", "XI", "XII"]
+};
+
+function updateClasses() {
+    const selectedLevel = level.value;
+
+    schoolClass.innerHTML =
+        '<option value="">Pilih kelas</option>';
+
+    (classes[selectedLevel] || []).forEach(item => {
+        const option = document.createElement("option");
+        option.value = item;
+        option.textContent = item;
+
+        if (item === currentClass) {
+            option.selected = true;
+        }
+
+        schoolClass.appendChild(option);
+    });
+}
+
+level.addEventListener("change", updateClasses);
+updateClasses();
+</script>
+
+</body>
+</html>

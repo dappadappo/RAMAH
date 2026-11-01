@@ -1,0 +1,10 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+
+database/ramah.db
+
+static/images/profile/*
+!static/images/profile/.gitkeep

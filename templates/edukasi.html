@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edukasi Anemia | RAMAH</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<main class="app-container">
+
+    <header class="topbar">
+        <div>
+            <h1>RAMAH<span>.</span></h1>
+            <p>Remaja Aktif Minum Tablet Tambah Darah</p>
+        </div>
+        <div class="avatar">💗</div>
+    </header>
+
+    <section class="welcome">
+        <div>
+            <p>Yuk, tambah pengetahuanmu!</p>
+            <h2>Edukasi Anemia 🌸</h2>
+            <small>Belajar sehat dimulai dari sekarang.</small>
+        </div>
+        <div class="mascot">📚</div>
+    </section>
+
+    <section class="education-banner">
+        <h2>Hai, Sahabat RAMAH! 💗</h2>
+        <p>
+            Kenali anemia, pahami manfaat TTD,
+            dan mulai kebiasaan sehat setiap hari.
+        </p>
+    </section>
+
+    <section class="section">
+
+        <h3>Pilih Materi Belajarmu 🌷</h3>
+
+        <div class="education-grid">
+
+            {% for item in materi %}
+
+                <a href="{{ url_for(
+                    'detail_edukasi',
+                    slug=item.slug
+                ) }}" class="education-card">
+
+                    <div class="education-icon">
+                        {{ item.emoji }}
+                    </div>
+
+                    <h3>{{ item.judul }}</h3>
+
+                    <p>{{ item.deskripsi }}</p>
+
+                    <span class="education-link">
+                        Pelajari →
+                    </span>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <a href="{{ url_for('kuis') }}"
+   class="quiz-banner"
+   style="display: flex; text-decoration: none; color: inherit;">
+
+    <div>
+        <h3>Seberapa paham kamu? 🎀</h3>
+
+        <p>
+            Uji pengetahuanmu melalui Kuis RAMAH.
+        </p>
+
+        <small>
+            Yuk, mulai kuis dan ukur pengetahuanmu!
+        </small>
+
+        <strong style="display: block; margin-top: 12px;">
+            Mulai Kuis →
+        </strong>
+    </div>
+
+    <span>❓</span>
+
+</a>
+
+    <section class="education-reference">
+        <strong>📖 Sumber edukasi</strong>
+        <p>
+            Materi disusun berdasarkan informasi kesehatan
+            dari artikel terpercaya.
+        </p>
+        <a href="https://share.google/l4nnxMz9CidRvgpiT"
+           target="_blank" rel="noopener noreferrer">
+            Kunjungi materinya, yuk! →
+        </a>
+    </section>
+
+    <nav class="bottom-nav">
+
+        <a href="/">
+            <span>⌂</span>
+            <small>Home</small>
+        </a>
+
+        <a href="/ttd">
+            <span>💊</span>
+            <small>TTD</small>
+        </a>
+
+        <a href="/kalender">
+            <span>▦</span>
+            <small>Kalender</small>
+        </a>
+
+        <a href="/edukasi" class="active">
+            <span>♡</span>
+            <small>Edukasi</small>
+        </a>
+
+        <a href="/profil">
+            <span>♙</span>
+            <small>Profil</small>
+        </a>
+
+    </nav>
+
+</main>
+
+</body>
+</html>

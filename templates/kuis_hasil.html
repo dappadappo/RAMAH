@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hasil Kuis | RAMAH</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<main class="app-container">
+
+    <header class="topbar">
+        <div>
+            <h1>RAMAH<span>.</span></h1>
+            <p>Remaja Aktif Minum Tablet Tambah Darah</p>
+        </div>
+        <div class="avatar">💗</div>
+    </header>
+
+    <section class="welcome">
+        <div>
+            <p>Kuis telah selesai!</p>
+            <h2>Hasil Kuis RAMAH 🌸</h2>
+            <small>Terima kasih sudah belajar bersama RAMAH.</small>
+        </div>
+        <div class="mascot">🏆</div>
+    </section>
+
+    <section class="quiz-result-card">
+
+        <p>SKOR PENGETAHUANMU</p>
+
+        <div class="quiz-score">
+            {{ skor }}
+        </div>
+
+        <span>dari 100 poin</span>
+
+        {% if skor >= 80 %}
+            <h2>Hebat Sekali! 🎉</h2>
+            <p>Kamu memiliki hasil yang sangat baik. Pertahankan semangat belajarmu!</p>
+
+        {% elif skor >= 60 %}
+            <h2>Bagus! 🌷</h2>
+            <p>Pengetahuanmu sudah cukup baik. Yuk, pelajari lagi materi yang belum dikuasai.</p>
+
+        {% else %}
+            <h2>Tetap Semangat! 💗</h2>
+            <p>Jangan menyerah. Baca kembali materi edukasi RAMAH dan coba lagi.</p>
+        {% endif %}
+
+        <div class="quiz-result-stats">
+
+            <div>
+                <strong>{{ benar }}</strong>
+                <small>Jawaban benar</small>
+            </div>
+
+            <div>
+                <strong>{{ total - benar }}</strong>
+                <small>Jawaban salah</small>
+            </div>
+
+            <div>
+                <strong>{{ total }}</strong>
+                <small>Total soal</small>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="section">
+
+        <h3>Pembahasan Jawaban 📚</h3>
+
+        {% for item in hasil %}
+
+        <article class="quiz-review-card">
+
+            <div class="quiz-question-header">
+                <span>PERTANYAAN {{ item.nomor }}</span>
+
+                {% if item.benar %}
+                    <span class="quiz-correct">✓ Benar</span>
+                {% else %}
+                    <span class="quiz-incorrect">✕ Belum tepat</span>
+                {% endif %}
+            </div>
+
+            <h3>{{ item.pertanyaan }}</h3>
+
+            <p>
+                Jawabanmu:
+                <strong>
+                    {% if item.jawaban_user %}
+                        {{ item.jawaban_user }}.
+                        {{ item.pilihan[item.jawaban_user] }}
+                    {% else %}
+                        Belum dijawab
+                    {% endif %}
+                </strong>
+            </p>
+
+            <p>
+                Jawaban benar:
+                <strong>
+                    {{ item.jawaban_benar }}.
+                    {{ item.pilihan[item.jawaban_benar] }}
+                </strong>
+            </p>
+
+            <div class="quiz-explanation">
+                <strong>💡 Pembahasan</strong>
+                <p>{{ item.pembahasan }}</p>
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+    </section>
+
+    <section class="tip-card">
+
+        <h3>Terus tingkatkan pengetahuanmu! 🌸</h3>
+
+        <p>
+            Jangan lupa membaca kembali materi edukasi
+            tentang anemia dan Tablet Tambah Darah.
+        </p>
+
+        <a href="{{ url_for('kuis') }}"
+           class="form-button quiz-action-button">
+            Ulangi Kuis 💗
+        </a>
+
+        <a href="{{ url_for('edukasi') }}"
+           class="quiz-secondary-button">
+            Kembali ke Edukasi
+        </a>
+
+    </section>
+
+    <nav class="bottom-nav">
+
+        <a href="/">
+            <span>⌂</span>
+            <small>Home</small>
+        </a>
+
+        <a href="/ttd">
+            <span>💊</span>
+            <small>TTD</small>
+        </a>
+
+        <a href="/kalender">
+            <span>▦</span>
+            <small>Kalender</small>
+        </a>
+
+        <a href="/edukasi" class="active">
+            <span>♡</span>
+            <small>Edukasi</small>
+        </a>
+
+        <a href="/profil">
+            <span>♙</span>
+            <small>Profil</small>
+        </a>
+
+    </nav>
+
+</main>
+
+</body>
+</html>

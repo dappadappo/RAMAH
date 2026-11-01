@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Kalender TTD | RAMAH</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<main class="app-container">
+
+    <header class="topbar">
+        <div>
+            <h1>RAMAH<span>.</span></h1>
+            <p>Remaja Aktif Minum Tablet Tambah Darah</p>
+        </div>
+        <div class="avatar">💗</div>
+    </header>
+
+    <section class="welcome">
+        <div>
+            <p>Catatan kesehatanmu</p>
+            <h2>Kalender TTD 🌸</h2>
+            <small>Pantau riwayat konsumsi TTD-mu.</small>
+        </div>
+        <div class="mascot">🌷</div>
+    </section>
+
+    <!-- KALENDER -->
+
+    <section class="calendar-card">
+
+        <div class="calendar-header">
+
+            <a href="{{ url_for(
+                'kalender_ttd',
+                month=previous_month,
+                year=previous_year
+            ) }}" class="calendar-arrow">
+                ‹
+            </a>
+
+            <div>
+                <h3>{{ month_name }}</h3>
+                <p>{{ year }}</p>
+            </div>
+
+            <a href="{{ url_for(
+                'kalender_ttd',
+                month=next_month,
+                year=next_year
+            ) }}" class="calendar-arrow">
+                ›
+            </a>
+
+        </div>
+
+        <div class="calendar-grid">
+
+            {% for day_name in
+                ['Min','Sen','Sel','Rab','Kam','Jum','Sab'] %}
+
+                <div class="calendar-day-name">
+                    {{ day_name }}
+                </div>
+
+            {% endfor %}
+
+            {% for week in calendar_data %}
+
+                {% for day in week %}
+
+                    {% if day == 0 %}
+
+                        <div class="calendar-date empty"></div>
+
+                    {% else %}
+
+                        {% set status = log_data.get(day) %}
+
+                        <div class="calendar-date
+                            {% if status == 'taken' %}
+                                taken
+                            {% elif status == 'missed' %}
+                                missed
+                            {% endif %}
+
+                            {% if day == today.day
+                                and month == today.month
+                                and year == today.year %}
+                                today
+                            {% endif %}
+                        ">
+
+                            <span>{{ day }}</span>
+
+                            {% if status == 'taken' %}
+                                <small>✓</small>
+                            {% elif status == 'missed' %}
+                                <small>–</small>
+                            {% endif %}
+
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            {% endfor %}
+
+        </div>
+
+        <div class="calendar-legend">
+
+            <span>
+                <i class="legend-dot taken-dot"></i>
+                Sudah minum
+            </span>
+
+            <span>
+                <i class="legend-dot missed-dot"></i>
+                Belum minum
+            </span>
+
+            <span>
+                <i class="legend-dot today-dot"></i>
+                Hari ini
+            </span>
+
+        </div>
+
+    </section>
+
+    <!-- RINGKASAN -->
+
+    <section class="section">
+
+        <h3>Aktivitas Bulan Ini 💗</h3>
+
+        <div class="calendar-stats">
+
+            <div class="calendar-stat">
+                <span>💊</span>
+                <h2>{{ total_taken }}</h2>
+                <p>Sudah minum</p>
+            </div>
+
+            <div class="calendar-stat">
+                <span>📝</span>
+                <h2>{{ total_recorded }}</h2>
+                <p>Total catatan</p>
+            </div>
+
+            <div class="calendar-stat">
+                <span>🌷</span>
+                <h2>{{ total_missed }}</h2>
+                <p>Belum minum</p>
+            </div>
+
+        </div>
+
+        <p class="calendar-note">
+            Ringkasan berdasarkan catatan yang dimasukkan pengguna,
+            bukan hasil pengukuran otomatis.
+        </p>
+
+    </section>
+
+    <!-- TOMBOL TRACKING -->
+
+    <a href="{{ url_for('tracking') }}"
+       class="calendar-action">
+        💊 Catat Konsumsi TTD
+    </a>
+
+    <!-- NAVIGASI -->
+
+    <nav class="bottom-nav">
+
+        <a href="/">
+            <span>⌂</span>
+            <small>Home</small>
+        </a>
+
+        <a href="/ttd">
+            <span>💊</span>
+            <small>TTD</small>
+        </a>
+
+        <a href="/kalender" class="active">
+            <span>▦</span>
+            <small>Kalender</small>
+        </a>
+
+        <a href="/">
+            <span>♡</span>
+            <small>Edukasi</small>
+        </a>
+
+        <a href="/profil">
+            <span>♙</span>
+            <small>Profil</small>
+        </a>
+
+    </nav>
+
+</main>
+
+</body>
+</html>

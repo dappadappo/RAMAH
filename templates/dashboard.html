@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAMAH | Remaja Aktif Minum TTD</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<main class="app-container">
+
+    <header class="topbar">
+        <div>
+            <h1>RAMAH<span>.</span></h1>
+            <p>Remaja Aktif Minum Tablet Tambah Darah</p>
+        </div>
+        <div class="avatar">💗</div>
+    </header>
+
+    <form action="{{ url_for('logout') }}" method="POST">
+    <button type="submit" class="logout-button">
+        Keluar dari akun
+    </button>
+</form>
+    <section class="welcome">
+        <div>
+            <p>Hai, {{ username }}! 💗</p>
+            <h2>Yuk, jaga kesehatanmu!</h2>
+            <small>Mulai kebiasaan sehat dari sekarang.</small>
+        </div>
+        <div class="mascot">🌸</div>
+    </section>
+
+    <section class="reminder-card">
+        <small>PENGINGAT TTD</small>
+        <h2>Sudah minum TTD sesuai jadwal?</h2>
+        <p>Yuk, catat konsumsi Tablet Tambah Darahmu!</p>
+
+        <form action="{{ url_for('tracking') }}" method="GET">
+    <button type="submit">
+        Catat Konsumsi TTD
+    </button>
+</form>
+    </section>
+
+    <section class="section">
+        <h3>Aktivitasmu 💗</h3>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span>💊</span>
+                <h2>{{ total_taken }} kali</h2>
+                <p>TTD tercatat</p>
+            </div>
+
+            <div class="stat-card">
+                <span>📈</span>
+                <h2>{{ total_taken }}</h2>
+<p>Total catatan TTD</p>
+            </div>
+        </div>
+        <small class="note">
+            *Angka hanya contoh tampilan, belum berasal dari data pengguna.
+        </small>
+    </section>
+
+    <section class="section">
+        <h3>Tips Sehat Hari Ini 🌷</h3>
+
+        <div class="tip-card">
+            <h4>Kenali Zat Besi!</h4>
+            <p>
+                Zat besi membantu tubuh membentuk hemoglobin,
+                protein dalam sel darah merah yang membawa
+                oksigen ke seluruh tubuh.
+            </p>
+        </div>
+    </section>
+
+    <nav class="bottom-nav">
+        <a href="/" class="active">
+            <span>⌂</span>
+            <small>Home</small>
+        </a>
+
+        <a href="/ttd">
+            <span>💊</span>
+            <small>TTD</small>
+        </a>
+
+        <a href="/kalender">
+    <span>▦</span>
+    <small>Kalender</small>
+</a>
+
+        <a href="/monitoring-hb">
+    <span>🩸</span>
+    <small>Monitoring Hb</small>
+</a>
+
+        <a href="/profil">
+            <span>♙</span>
+            <small>Profil</small>
+        </a>
+        
+    </nav>
+
+</main>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+</html>

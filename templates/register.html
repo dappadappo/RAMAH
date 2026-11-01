@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Akun | RAMAH</title>
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+<main class="app-container">
+
+    <header class="topbar">
+        <div>
+            <h1>RAMAH<span>.</span></h1>
+            <p>Remaja Aktif Minum Tablet Tambah Darah</p>
+        </div>
+        <div class="avatar">💗</div>
+    </header>
+
+    <section class="welcome">
+        <div>
+            <p>Selamat datang, Sahabat!</p>
+            <h2>Buat Akun RAMAH 🌸</h2>
+            <small>Mulai perjalanan sehatmu bersama kami.</small>
+        </div>
+        <div class="mascot">🌷</div>
+    </section>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="form-message {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endwith %}
+
+    <section class="tip-card">
+        <form method="POST" action="{{ url_for('register') }}">
+
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Buat username"
+                minlength="3"
+                maxlength="20"
+                pattern="[A-Za-z0-9_]+"
+                autocomplete="username"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Minimal 8 karakter"
+                minlength="8"
+                autocomplete="new-password"
+                required
+            >
+
+            <label for="confirm_password">Konfirmasi Password</label>
+            <input
+                type="password"
+                id="confirm_password"
+                name="confirm_password"
+                placeholder="Masukkan ulang password"
+                minlength="8"
+                autocomplete="new-password"
+                required
+            >
+
+            <label class="consent-label">
+                <input type="checkbox" name="acknowledgement" required>
+                <span>
+                    Saya telah membaca informasi penggunaan
+                    RAMAH dan memahami bahwa aplikasi ini
+                    merupakan media edukasi dan monitoring,
+                    bukan alat diagnosis medis.
+                </span>
+            </label>
+
+            <button type="submit" class="form-button">
+                Buat Akun 💗
+            </button>
+        </form>
+
+        <p class="login-link">
+            Sudah punya akun?
+            <a href="{{ url_for('login') }}">Masuk di sini</a>
+        </p>
+    </section>
+
+</main>
+</body>
+</html>

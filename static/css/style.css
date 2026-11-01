@@ -1,0 +1,1125 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --pink: #ec4899;
+    --pink-dark: #be185d;
+    --pink-light: #fce7f3;
+    --background: #fff5fa;
+    --text: #831843;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+.app-container {
+    max-width: 480px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 22px 18px 100px;
+    background: linear-gradient(#fff1f7, white, #fff5fa);
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.topbar h1 {
+    color: var(--pink);
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.topbar p {
+    font-size: 11px;
+    color: #9d5477;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    background: var(--pink-light);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.welcome {
+    background: var(--pink-light);
+    padding: 22px;
+    border-radius: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.welcome h2 {
+    margin: 7px 0;
+    font-size: 20px;
+}
+
+.welcome small {
+    font-size: 11px;
+}
+
+.mascot {
+    font-size: 42px;
+}
+
+.reminder-card {
+    background: linear-gradient(135deg, #f472b6, #ec4899);
+    color: white;
+    padding: 23px;
+    border-radius: 22px;
+    margin-bottom: 25px;
+}
+
+.reminder-card h2 {
+    margin: 12px 0 7px;
+    font-size: 20px;
+}
+
+.reminder-card p {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.reminder-card button {
+    width: 100%;
+    margin-top: 18px;
+    padding: 13px;
+    border: none;
+    border-radius: 30px;
+    background: white;
+    color: var(--pink-dark);
+    font-family: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.section {
+    margin-bottom: 25px;
+}
+
+.section h3 {
+    margin-bottom: 13px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.stat-card,
+.tip-card {
+    background: white;
+    padding: 18px;
+    border: 1px solid #fbcfe8;
+    border-radius: 18px;
+}
+
+.stat-card span {
+    font-size: 23px;
+}
+
+.stat-card h2 {
+    color: var(--pink-dark);
+    margin: 8px 0;
+}
+
+.stat-card p,
+.note {
+    font-size: 12px;
+    color: #9d5477;
+}
+
+.note {
+    display: block;
+    margin-top: 8px;
+}
+
+.tip-card h4 {
+    color: var(--pink-dark);
+    margin-bottom: 8px;
+}
+
+.tip-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #9d5477;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    justify-content: space-around;
+    padding: 13px 5px;
+    background: white;
+    border-top: 1px solid #fbcfe8;
+    z-index: 10;
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    color: #b77999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.bottom-nav a.active {
+    color: var(--pink);
+}
+
+.bottom-nav small {
+    font-size: 10px;
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    body {
+        padding: 25px 0;
+    }
+
+    .app-container {
+        border-radius: 24px;
+        box-shadow: 0 5px 35px #ec489915;
+    }
+}
+
+
+.secondary-button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 13px;
+    border: 1px solid white;
+    border-radius: 30px;
+    background: transparent;
+    color: white;
+    font-family: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.history-item {
+    padding: 14px 0;
+    border-bottom: 1px solid #fbcfe8;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-item strong {
+    font-size: 14px;
+}
+
+.history-item p {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.success-text {
+    color: #15803d;
+}
+
+.missed-text {
+    color: #be185d;
+}
+
+
+/* FORM REGISTRASI DAN LOGIN */
+
+.tip-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tip-card label:not(.consent-label) {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text);
+}
+
+.tip-card input[type="text"],
+.tip-card input[type="password"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #fbcfe8;
+    border-radius: 13px;
+    background: #fffafd;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+}
+
+.tip-card input:focus {
+    border-color: var(--pink);
+    box-shadow: 0 0 0 3px #ec489920;
+}
+
+.consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin: 10px 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #9d5477;
+}
+
+.consent-label input {
+    margin-top: 4px;
+    accent-color: var(--pink);
+}
+
+.form-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #f472b6, #ec4899);
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.login-link {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 13px;
+    color: #9d5477;
+}
+
+.login-link a {
+    color: var(--pink-dark);
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.form-message {
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 13px;
+}
+
+.form-message.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.form-message.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+
+.logout-button {
+    width: 100%;
+    padding: 11px;
+    margin: 15px 0;
+    border: 1px solid #fbcfe8;
+    border-radius: 25px;
+    background: white;
+    color: #be185d;
+    font-family: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+
+
+/* PROFIL RAMAH */
+
+.profile-header {
+    text-align: center;
+    background: #fce7f3;
+    padding: 25px 15px;
+    border-radius: 22px;
+    margin-bottom: 20px;
+}
+
+.profile-photo,
+.profile-placeholder {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    margin: 0 auto 12px;
+}
+
+.profile-placeholder {
+    display: grid;
+    place-items: center;
+    background: white;
+    font-size: 45px;
+}
+
+.profile-header h2 {
+    color: #831843;
+    margin-bottom: 4px;
+}
+
+.profile-header p {
+    font-size: 13px;
+    color: #9d5477;
+    margin-bottom: 5px;
+}
+
+.profile-header small {
+    color: #be185d;
+}
+
+.tip-card select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #fbcfe8;
+    border-radius: 13px;
+    background: #fffafd;
+    color: #831843;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.upload-note {
+    font-size: 11px;
+    color: #9d5477;
+    line-height: 1.5;
+}
+
+
+
+/* =================================
+   KALENDER RAMAH
+================================= */
+
+.calendar-card {
+    background: white;
+    padding: 20px 15px;
+    border: 1px solid #fbcfe8;
+    border-radius: 22px;
+    margin-bottom: 22px;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.calendar-header h3 {
+    color: #be4b89;
+    font-size: 20px;
+    margin: 0;
+}
+
+.calendar-header p {
+    color: #a66b8c;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.calendar-arrow {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fce7f3;
+    color: #be185d;
+    text-decoration: none;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 7px;
+}
+
+.calendar-day-name {
+    text-align: center;
+    color: #be6b96;
+    font-size: 11px;
+    font-weight: bold;
+    padding-bottom: 8px;
+}
+
+.calendar-date {
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    background: #fff7fb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: #831843;
+    font-size: 13px;
+}
+
+.calendar-date small {
+    font-weight: 900;
+    font-size: 11px;
+}
+
+.calendar-date.taken {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.calendar-date.missed {
+    background: #ffe4e6;
+    color: #be123c;
+}
+
+.calendar-date.today {
+    outline: 2px solid #ec4899;
+    outline-offset: 1px;
+    font-weight: 900;
+}
+
+.calendar-date.empty {
+    background: transparent;
+}
+
+.calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+    font-size: 10px;
+    color: #95617b;
+}
+
+.calendar-legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.taken-dot {
+    background: #86d6a1;
+}
+
+.missed-dot {
+    background: #fb7185;
+}
+
+.today-dot {
+    background: #ec4899;
+}
+
+.calendar-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.calendar-stat {
+    padding: 13px 5px;
+    text-align: center;
+    border: 1px solid #fbcfe8;
+    border-radius: 17px;
+    background: white;
+}
+
+.calendar-stat span {
+    font-size: 23px;
+}
+
+.calendar-stat h2 {
+    font-size: 24px;
+    color: #be3477;
+    margin: 7px 0;
+}
+
+.calendar-stat p {
+    color: #a66b8c;
+    font-size: 10px;
+    margin: 0;
+}
+
+.calendar-note {
+    font-size: 11px;
+    color: #a66b8c;
+    margin-top: 12px;
+    line-height: 1.6;
+}
+
+.calendar-action {
+    display: block;
+    padding: 15px;
+    text-align: center;
+    background: linear-gradient(135deg, #e879b5, #d64e91);
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+
+/* =================================
+   MONITORING Hb RAMAH
+================================= */
+
+.hb-summary {
+    padding: 22px;
+    margin-bottom: 20px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #e879b5, #d64e91);
+    color: white;
+}
+
+.hb-summary h2 {
+    font-size: 42px;
+    margin: 12px 0;
+}
+
+.hb-summary h2 span {
+    font-size: 16px;
+}
+
+.hb-summary p {
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.hb-summary small {
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.tip-card textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #fbcfe8;
+    border-radius: 13px;
+    background: #fffafd;
+    color: #831843;
+    font-family: inherit;
+    font-size: 13px;
+    resize: vertical;
+}
+
+.hb-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hb-chart-item {
+    width: 100%;
+}
+
+.hb-chart-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #9d5477;
+}
+
+.hb-chart-label strong {
+    color: #be3477;
+}
+
+.hb-bar-background {
+    height: 13px;
+    width: 100%;
+    border-radius: 20px;
+    background: #fce7f3;
+    overflow: hidden;
+}
+
+.hb-bar {
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #f9a8d4, #db5b9e);
+}
+
+.hb-history {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: white;
+    border: 1px solid #fbcfe8;
+    border-radius: 16px;
+}
+
+.hb-history strong {
+    font-size: 12px;
+    color: #9d5477;
+}
+
+.hb-history h3 {
+    color: #be3477;
+    margin: 6px 0;
+}
+
+.hb-history small,
+.hb-history p {
+    font-size: 11px;
+    color: #9d5477;
+}
+
+.delete-hb-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 20px;
+    background: #ffe4e6;
+    color: #be123c;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.hb-info {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 16px;
+    background: #fce7f3;
+    color: #831843;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.hb-info p {
+    margin-top: 6px;
+}
+
+
+
+/* ==========================================
+   EDUKASI ANEMIA RAMAH
+========================================== */
+
+.education-banner {
+    background: linear-gradient(135deg, #fce7f3, #f9d5e9);
+    padding: 22px;
+    border-radius: 22px;
+    margin-bottom: 25px;
+    color: #831843;
+}
+
+.education-banner h2 {
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.education-banner p {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+    margin-top: 15px;
+}
+
+.education-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 16px 13px;
+    border: 1px solid #fbcfe8;
+    border-radius: 19px;
+    background: white;
+    text-decoration: none;
+    color: #831843;
+    transition: transform 0.2s ease;
+}
+
+.education-card:active {
+    transform: scale(0.97);
+}
+
+.education-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.education-card h3 {
+    font-size: 14px;
+    margin: 0 0 8px;
+}
+
+.education-card p {
+    color: #a66b8c;
+    font-size: 11px;
+    line-height: 1.6;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.education-link {
+    color: #d64e91;
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 14px;
+}
+
+.quiz-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    margin: 25px 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #d96aa7, #c94d91);
+    color: white;
+}
+
+.quiz-banner h3 {
+    font-size: 16px;
+    margin: 0 0 8px;
+}
+
+.quiz-banner p {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.quiz-banner small {
+    font-size: 10px;
+}
+
+.quiz-banner span {
+    font-size: 35px;
+}
+
+.education-reference {
+    padding: 16px;
+    background: #fff0f6;
+    border-radius: 16px;
+    margin: 20px 0;
+    color: #831843;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.education-reference a {
+    display: inline-block;
+    margin-top: 8px;
+    color: #c02675;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.back-education {
+    display: inline-block;
+    color: #c02675;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.education-detail-hero {
+    padding: 25px 20px;
+    text-align: center;
+    border-radius: 22px;
+    background: #fce7f3;
+    color: #831843;
+}
+
+.detail-emoji {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+.education-detail-hero h2 {
+    font-size: 22px;
+}
+
+.education-detail-hero p {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.education-content {
+    margin-top: 22px;
+}
+
+.education-article {
+    padding: 18px;
+    margin-bottom: 13px;
+    border: 1px solid #fbcfe8;
+    border-radius: 18px;
+    background: white;
+}
+
+.education-article h3 {
+    color: #be3477;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.education-article p {
+    color: #795269;
+    font-size: 13px;
+    line-height: 1.9;
+    margin: 0;
+}
+
+.education-reminder {
+    padding: 18px;
+    background: #fce7f3;
+    color: #831843;
+    border-radius: 18px;
+    margin: 20px 0;
+}
+
+.education-reminder h3 {
+    font-size: 15px;
+}
+
+.education-reminder p {
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.education-back-button {
+    display: block;
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(135deg, #e879b5, #d64e91);
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+@media (max-width: 360px) {
+    .education-grid {
+        gap: 9px;
+    }
+
+    .education-card {
+        padding: 13px 10px;
+    }
+}
+/* ==========================================
+   KUIS RAMAH
+========================================== */
+
+.quiz-question {
+    margin-bottom: 20px;
+}
+
+.quiz-question-header {
+    display: flex;
+    justify-content: space-between;
+    color: #c45491;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.quiz-question h3 {
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px;
+    border: 1px solid #f0c9df;
+    border-radius: 14px;
+    background: #fff8fc;
+    cursor: pointer;
+    transition: 0.2s;
+    line-height: 1.5;
+}
+
+.quiz-option:hover {
+    background: #fce8f3;
+    border-color: #d76aa7;
+}
+
+.quiz-option input {
+    accent-color: #cf5a9b;
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+}
+
+.quiz-option-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #f8ddea;
+    color: #9e3e75;
+    font-weight: 700;
+}
+/* ==========================================
+   HASIL KUIS RAMAH
+========================================== */
+
+.quiz-result-card {
+    background: linear-gradient(145deg, #f9e5f0, #f5d5e9);
+    border-radius: 22px;
+    padding: 25px 18px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.quiz-result-card > p:first-child {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.quiz-score {
+    font-size: 64px;
+    font-weight: 800;
+    color: #c64e91;
+    margin: 12px 0 0;
+}
+
+.quiz-result-card h2 {
+    color: #923d6b;
+    margin-top: 15px;
+}
+
+.quiz-result-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 22px;
+}
+
+.quiz-result-stats div {
+    background: #fffafd;
+    padding: 13px 5px;
+    border-radius: 14px;
+}
+
+.quiz-result-stats strong,
+.quiz-result-stats small {
+    display: block;
+}
+
+.quiz-result-stats strong {
+    font-size: 23px;
+    color: #c64e91;
+}
+
+.quiz-result-stats small {
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.quiz-review-card {
+    background: white;
+    border: 1px solid #f1c9df;
+    border-radius: 17px;
+    padding: 17px;
+    margin-bottom: 15px;
+}
+
+.quiz-review-card h3 {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 15px 0;
+}
+
+.quiz-review-card p {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.quiz-correct {
+    color: #26865b;
+    font-weight: 700;
+}
+
+.quiz-incorrect {
+    color: #d15a76;
+    font-weight: 700;
+}
+
+.quiz-explanation {
+    background: #fff1f7;
+    padding: 13px;
+    border-radius: 12px;
+    margin-top: 14px;
+}
+
+.quiz-explanation p {
+    margin-bottom: 0;
+}
+
+.quiz-action-button {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.quiz-secondary-button {
+    display: block;
+    text-align: center;
+    padding: 13px;
+    margin-top: 12px;
+    border: 1px solid #d66aa4;
+    border-radius: 30px;
+    color: #bd4f8d;
+    text-decoration: none;
+    font-weight: 700;
+}

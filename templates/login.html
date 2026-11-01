@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | RAMAH</title>
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+<main class="app-container">
+
+    <header class="topbar">
+        <div>
+            <h1>RAMAH<span>.</span></h1>
+            <p>Remaja Aktif Minum Tablet Tambah Darah</p>
+        </div>
+        <div class="avatar">💗</div>
+    </header>
+
+    <section class="welcome">
+        <div>
+            <p>Halo, Sahabat RAMAH!</p>
+            <h2>Senang bertemu lagi 🌸</h2>
+            <small>Masuk untuk melanjutkan perjalanan sehatmu.</small>
+        </div>
+        <div class="mascot">💕</div>
+    </section>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="form-message {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endwith %}
+
+    <section class="tip-card">
+        <form method="POST" action="{{ url_for('login') }}">
+
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Masukkan username"
+                autocomplete="username"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Masukkan password"
+                autocomplete="current-password"
+                required
+            >
+
+            <button type="submit" class="form-button">
+                Masuk ke RAMAH 💗
+            </button>
+
+        </form>
+
+        <p class="login-link">
+            Belum punya akun?
+            <a href="{{ url_for('register') }}">Daftar sekarang</a>
+        </p>
+    </section>
+
+</main>
+</body>
+</html>
